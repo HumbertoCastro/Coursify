@@ -28,14 +28,19 @@ function PostInternal() {
   const fetchMedia = () => {
     fetch(`https://blog.coursify.me/wp-json/wp/v2/media/${post.featured_media}`)
       .then((response) => response.json()).then((img) => {
+        console.log(post)
+        console.log(img);
         setMedia(img);
       })
   }
 
   useEffect(() => {
     fetchPost();
-    fetchMedia();
   }, [])
+
+  useEffect(() => {
+    fetchMedia();
+  }, [post])
 
   const renderPage = () => {
     console.log(media);
