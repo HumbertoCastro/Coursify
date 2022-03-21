@@ -4,6 +4,7 @@ import CategoriesPosts from './CategoriesPosts';
 function Categories() {
   const [posts, setPosts] = useState([]);
   const [media, setMedia] = useState([]);
+  const [value, setValue] = useState('padrao');
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState([true]);
 
@@ -62,11 +63,18 @@ function Categories() {
         loading ? <h1>Loading . . .</h1> :
         <div>
           <select
+            value={ value }
             onChange={ ({ target: { value } }) => {
+              setLoading(true)
+              setTimeout(() => {
+                setLoading(false);                
+              }, 1000);
               if (value === 'textCres') {
+                setValue(value);
                 const newList = categories.sort(filterNameCres);
                 setCategories(newList);
               } else if (value === 'textDesc') {
+                setValue(value);
                 const newList = categories.sort(filterNameDesc);
                 setCategories(newList);
               }
